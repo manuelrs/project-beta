@@ -1,0 +1,13 @@
+<h2> Caregivers near you </h2>
+
+<ul>
+  <% careGiversList.forEach((careGiver) => { %>
+    <li>
+      <h3> <%= careGiver.name %> </h3>
+
+      <a href="/show/<%= careGiver._id %>">
+        Show profile
+      </a>
+    </li>
+  <% }) %>
+</ul>

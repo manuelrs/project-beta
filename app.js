@@ -80,11 +80,13 @@ app.use(passport.session());
 app.use((req, res, next) => {
   res.locals.user = req.user;
   res.locals.errors = req.flash("error");
+  if (res.locals.errors) console.error(res.locals.errors);
   next();
 });
 
 app.use("/", require("./routes/index"));
 app.use("/", require("./routes/auth"));
+app.use("/", require("./routes/services"));
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
