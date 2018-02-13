@@ -36,6 +36,10 @@ const serviceSchema = new Schema({
   feedback: {
     type: Array,
     default: []
+  },
+  confirmed: {
+    type: Boolean,
+    default: false
   }
 });
 

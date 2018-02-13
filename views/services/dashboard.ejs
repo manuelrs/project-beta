@@ -1,0 +1,59 @@
+<% if (req.user.role === "admin") { %>
+  <h3> Hello <%= req.user.name%> </h3>
+  <p>Your confirmed requests:</p>
+  <ul>
+  <% services.filter(service => service.confirmed === true).forEach((service) => { %>
+    <li>
+      <h4> <%= service.service %> </h4>
+
+      <ul>
+        <li> <b>Care taker</b>: <%= service.careTaker.name %> </li>
+        <li> <b>Care giver</b>: <%= service.careGiver.name %> </li>
+      </ul>
+    </li>
+  <% }) %>
+</ul>
+<p>Your pending requests:</p>
+  <ul>
+  <% services.filter(service => service.confirmed === false).forEach((service) => { %>
+    <li>
+      <h4> <%= service.service %> </h4>
+
+      <ul>
+        <li> <b>Care taker</b>: <%= service.careTaker.name %> </li>
+        <li> <b>Care giver</b>: <%= service.careGiver.name %> </li>
+      </ul>
+    </li>
+  <% }) %>
+</ul>
+<% } else { %>
+<h3> Hello <%= req.user.name%> </h3>
+<p>Your upcoming requests:</p>
+<ul>
+<% services.filter(service => service.confirmed === true).forEach((service) => { %>
+  <li>
+    <h4> <%= service.service %> </h4>
+
+    <ul>
+      <li> <b>Care taker</b>: <%= service.careTaker.name %> </li>
+      <li> <b>Care giver</b>: <%= service.careGiver.name %> </li>
+    </ul>
+  </li>
+<% }) %>
+</ul>
+<p>Your open requests:</p>
+<ul>
+<% services.filter(service => service.confirmed === false).forEach((service) => { %>
+  <li>
+    <h4> <%= service.service %> </h4>
+
+    <ul>
+      <li> <b>Care taker</b>: <%= service.careTaker.name %> </li>
+      <li> <b>Care giver</b>: <%= service.careGiver.name %> </li>
+      <a href="/services/<%= service._id %>/confirm">Confirm service</a>
+      <a href="/services/<%= service._id %>/decline">Decline service</a>
+    </ul>
+  </li>
+<% }) %>
+</ul>
+<% } %>
