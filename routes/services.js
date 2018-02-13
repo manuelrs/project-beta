@@ -18,6 +18,25 @@ router.get("/services", (req, res, next) => {
   });
 });
 
+router.post("/search", (req, res, next) => {
+  const service = req.body.service;
+  const city = req.body.city;
+  const bookedDate = req.body.bookedDate;
+  console.log(bookedDate);
+  User.find(
+    { service: service, city: city, bookedDates: { $ne: bookedDate } },
+    (err, careGiversList) => {
+      if (err) {
+        next(err);
+        return;
+      }
+      res.render("services/caregivers", {
+        careGiversList: careGiversList
+      });
+    }
+  );
+});
+
 router.get("/services/:id", (req, res, next) => {
   const caregiverId = req.params.id;
   User.findById(caregiverId, (err, careGiver) => {
@@ -31,27 +50,27 @@ router.get("/services/:id", (req, res, next) => {
   });
 });
 
-router.get("/services/:id/book", ensureLoggedOut(), (req, res, next) => {
-  res.render("services/book");
+router.post("/services/:id/book", ensureLoggedIn(), (req, res, next) => {
+  const caregiverId = req.params.id;
+  const service = req.body.service;
+  const city = req.body.city;
+  const bookedDate = req.body.bookedDate;
+  User.findByIdAndUpdate(
+    caregiverId,
+    {
+      $push: { bookedDates: bookedDate }
+    },
+    (err, updatedCareGiver) => {
+      if (err) {
+        next(err);
+        return;
+      }
+
+      res.render("services/confirm", {
+        careGiver: updatedCareGiver
+      });
+    }
+  );
 });
-
-// router.post("/services/:id/book", (req, res, next) => {
-//   const serviceInfo = {
-//     bookedDates: req.body.bookedDate,
-//     careGiver: req.body.careGiverId,
-//     careTaker: req.session.currentUser._id
-//   };
-
-//   const newService = new Service(serviceInfo);
-
-//   newService.save(err => {
-//     if (err) {
-//       next(err);
-//       return;
-//     }
-
-//     res.redirect("/services");
-//   });
-// });
 
 module.exports = router;

@@ -1,4 +1,26 @@
 <h2> Caregivers near you </h2>
+<form method="POST" action="/search">
+<label>
+Care type:
+<select name="service">
+  <option value="activity">Activity</option>
+  <option value="company">Company</option>
+  <option value="support">Support</option>
+  <option value="professionalCare">Professional care</option>
+</select>
+</label>
+
+<label>
+City:
+<input type="text" name="city">
+</label>
+
+<label>
+Date:
+<input type="date" name="bookedDate">
+</label>
+<button>Search</button>
+</form>
 
 <ul>
   <% careGiversList.forEach((careGiver) => { %>

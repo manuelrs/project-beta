@@ -2,4 +2,25 @@
 <h2><%= careGiver.name%> <%= careGiver.familyName%></h2>
 <span>Address: <%= careGiver.address %>, <%= careGiver.city %>, <%= careGiver.country %> </span> <br/>
 <span>About me: <%= careGiver.description %> </span> 
-<a href="/services/<%= careGiver._id %>/book">Book now</a>
+<form method="POST" action="/services/<%= careGiver._id %>/book">
+<label>
+Care type:
+<select name="service">
+  <option value="activity">Activity</option>
+  <option value="company">Company</option>
+  <option value="support">Support</option>
+  <option value="professionalCare">Professional care</option>
+</select>
+</label>
+
+<label>
+City:
+<input type="text" name="city">
+</label>
+
+<label>
+Date:
+<input type="date" name="bookedDate">
+</label>
+<button>Book now</button>
+</form>
