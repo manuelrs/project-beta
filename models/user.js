@@ -28,6 +28,18 @@ const userSchema = new Schema({
     type: String,
     required: true
   },
+  country: {
+    type: String,
+    required: true
+  },
+  city: {
+    type: String,
+    required: true
+  },
+  zipCode: {
+    type: Number,
+    required: true
+  },
   phoneNumber: {
     type: String,
     required: true
@@ -67,8 +79,10 @@ const userSchema = new Schema({
     default: ""
   },
   feedback: {
-    type: Array,
-    default: ""
+    type: Array
+  },
+  pictures: {
+    type: Array
   }
 });
 

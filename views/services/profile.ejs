@@ -1,0 +1,5 @@
+<img src="<%=careGiver.pictures[0]%>" width ="800" height ="600"> <br/>
+<h2><%= careGiver.name%> <%= careGiver.familyName%></h2>
+<span>Address: <%= careGiver.address %>, <%= careGiver.city %>, <%= careGiver.country %> </span> <br/>
+<span>About me: <%= careGiver.description %> </span> 
+<a href="/services/<%= careGiver._id %>/book">Book now</a>

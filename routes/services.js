@@ -12,12 +12,46 @@ router.get("/services", (req, res, next) => {
       next(err);
       return;
     }
-
-    console.log("DEBUG careGiversList", careGiversList);
     res.render("services/caregivers", {
       careGiversList: careGiversList
     });
   });
 });
+
+router.get("/services/:id", (req, res, next) => {
+  const caregiverId = req.params.id;
+  User.findById(caregiverId, (err, careGiver) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    res.render("services/profile", {
+      careGiver: careGiver
+    });
+  });
+});
+
+router.get("/services/:id/book", ensureLoggedOut(), (req, res, next) => {
+  res.render("services/book");
+});
+
+// router.post("/services/:id/book", (req, res, next) => {
+//   const serviceInfo = {
+//     bookedDates: req.body.bookedDate,
+//     careGiver: req.body.careGiverId,
+//     careTaker: req.session.currentUser._id
+//   };
+
+//   const newService = new Service(serviceInfo);
+
+//   newService.save(err => {
+//     if (err) {
+//       next(err);
+//       return;
+//     }
+
+//     res.redirect("/services");
+//   });
+// });
 
 module.exports = router;

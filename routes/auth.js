@@ -17,6 +17,9 @@ router.post("/signup", ensureLoggedOut(), (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
   const address = req.body.address;
+  const country = req.body.country;
+  const city = req.body.city;
+  const zipCode = req.body.zipCode;
   const phoneNumber = req.body.phoneNumber;
   const facebookID = req.body.facebookID;
   const role = req.body.role;
@@ -27,6 +30,7 @@ router.post("/signup", ensureLoggedOut(), (req, res, next) => {
   const nationality = req.body.nationality;
   const description = req.body.description;
   const feedback = req.body.feedback;
+  const pictures = req.body.pictures;
 
   if (!password) {
     req.flash("error", "Password is required");
@@ -44,6 +48,9 @@ router.post("/signup", ensureLoggedOut(), (req, res, next) => {
         email: email,
         password: hash,
         address: address,
+        country: country,
+        city: city,
+        zipCode: zipCode,
         phoneNumber: phoneNumber,
         facebookID: facebookID,
         role: role,
@@ -52,7 +59,8 @@ router.post("/signup", ensureLoggedOut(), (req, res, next) => {
         price: price,
         mobility: mobility,
         description: description,
-        feedback: feedback
+        feedback: feedback,
+        pictures: pictures
       });
 
       user.save(err => {

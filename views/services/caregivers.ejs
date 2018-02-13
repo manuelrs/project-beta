@@ -4,8 +4,10 @@
   <% careGiversList.forEach((careGiver) => { %>
     <li>
       <h3> <%= careGiver.name %> </h3>
+      <img src="<%=careGiver.pictures[0]%>" width ="200" height ="140"> <br/>
+      <span> <%= careGiver.address %>, <%= careGiver.city %>, <%= careGiver.country %> </span> <br/>
 
-      <a href="/show/<%= careGiver._id %>">
+      <a href="/services/<%= careGiver._id %>">
         Show profile
       </a>
     </li>
