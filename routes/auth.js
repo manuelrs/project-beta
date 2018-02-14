@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../models/user");
+const PatientCard = require("../models/patientCard");
 const passport = require("passport");
 const bcrypt = require("bcrypt");
 const saltRounds = 14;
@@ -81,7 +82,12 @@ router.post("/signup", ensureLoggedOut(), (req, res, next) => {
         if (err) {
           return next(err);
         }
-        res.redirect("/login");
+        console.log(user);
+        const patientCard = new PatientCard({ careTakerId: user._id });
+        patientCard.save(err => {
+          if (err) return next(err);
+          res.redirect("/login");
+        });
       });
     });
   });

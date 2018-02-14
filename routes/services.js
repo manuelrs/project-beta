@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const User = require("../models/user");
 const Service = require("../models/service");
+const PatientCard = require("../models/patientCard");
 const passport = require("passport");
 const bcrypt = require("bcrypt");
 const saltRounds = 14;
@@ -23,7 +24,6 @@ router.post("/search", (req, res, next) => {
   const service = req.body.service;
   const city = req.body.city;
   const bookedDate = req.body.bookedDate;
-  console.log(bookedDate);
   User.find(
     { service: service, city: city, bookedDates: { $ne: bookedDate } },
     (err, careGiversList) => {
@@ -61,8 +61,6 @@ router.post("/services/:id/book", ensureLoggedIn(), (req, res, next) => {
   const service = req.body.service;
   const city = req.user.city;
   const bookedDate = req.body.bookedDate;
-
-  console.log(price);
 
   const serviceInfo = {
     careGiver: caregiverId,
@@ -229,8 +227,56 @@ router.get("/services/:id/complete", (req, res, next) => {
     if (err) next(err);
     User.findById(service.careTaker, (err, careTaker) => {
       if (err) next(err);
-      res.render("services/complete", { careTaker: careTaker });
+      res.render("services/complete", {
+        careTaker: careTaker,
+        service: service
+      });
     });
+  });
+});
+
+router.post("/services/:id/complete", (req, res, next) => {
+  Service.findById(req.params.id, (err, service) => {
+    if (err) next(err);
+    PatientCard.find({ careTakerId: service.careTaker }, (err, patientCard) => {
+      if (err) next(err);
+      PatientCard.findByIdAndUpdate(
+        patientCard[0]._id,
+        {
+          $push: {
+            patientInfo: {
+              heartRate: req.body.heartRate,
+              oxigenation: req.body.oxigenation,
+              mood: req.body.mood,
+              medicament1: req.body.medicament1,
+              medicament2: req.body.medicament2,
+              medicament3: req.body.medicament3,
+              medicament4: req.body.medicament4,
+              medicament5: req.body.medicament5,
+              comments: req.body.comments
+            }
+          }
+        },
+        (err, patientCard) => {
+          if (err) next(err);
+          Service.findByIdAndUpdate(
+            req.params.id,
+            { logged: true },
+            (err, service) => {
+              if (err) next(err);
+              res.render("/dashboard/");
+            }
+          );
+        }
+      );
+    });
+  });
+});
+
+router.get("/services/:id/history", ensureLoggedIn(), (req, res, next) => {
+  PatientCard.find({ careTakerId: req.params.id }, (err, patientCard) => {
+    if (err) next(err);
+    res.render("services/history", { patientCard: patientCard[0] });
   });
 });
 

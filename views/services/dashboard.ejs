@@ -1,5 +1,5 @@
-<% if (req.user.role === "admin") { %>
-  <h3> Hello <%= req.user.name%> </h3> <a href="/services/<%= user._id %>/edit">Edit your profile</a>
+<% if (req.user.role === "careTaker") { %>
+  <h3> Hello <%= req.user.name%> </h3> <a href="/services/<%= user._id %>/edit">Edit your profile</a> <a href="/services/<%= user._id %>/history">Show your attention history</a>
   <p>Your confirmed requests:</p>
   <ul>
   <% services.filter(service => service.confirmed === true).forEach((service) => { %>
@@ -30,7 +30,7 @@
 <h3> Hello <%= req.user.name%> </h3> <a href="/services/<%= user._id %>/edit">Edit your profile</a>
 <p>Your upcoming requests:</p>
 <ul>
-<% services.filter(service => service.confirmed === true).forEach((service) => { %>
+<% services.filter(service => service.confirmed === true).filter(service => service.logged === false).forEach((service) => { %>
   <li>
     <h4> <%= service.service %> on <%= service.bookedDates[0]%></h4>
 

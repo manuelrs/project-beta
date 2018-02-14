@@ -9,7 +9,7 @@ var salt = bcrypt.genSaltSync(bcryptSalt);
 const password = "a";
 var encryptedPass = bcrypt.hashSync(password, salt);
 
-const boss = new User({
+const admin = new User({
   username: "admin",
   name: "Manuel",
   familyName: "Rojas",
@@ -20,7 +20,7 @@ const boss = new User({
   role: "admin"
 });
 
-User.create(boss, (err, user) => {
+User.create(admin, (err, user) => {
   if (err) {
     throw err;
   }

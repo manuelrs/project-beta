@@ -44,6 +44,10 @@ const serviceSchema = new Schema({
   declined: {
     type: Boolean,
     default: false
+  },
+  logged: {
+    type: Boolean,
+    default: false
   }
 });
 
