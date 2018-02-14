@@ -53,7 +53,6 @@ router.get("/services/:id", (req, res, next) => {
 
 router.post("/services/:id/book", ensureLoggedIn(), (req, res, next) => {
   const caregiverId = req.params.id;
-  console.log("user" + req.user._id);
   const careTakerId = req.user._id;
   const address = req.user.address;
   const country = req.user.country;
@@ -94,7 +93,7 @@ router.post("/services/:id/book", ensureLoggedIn(), (req, res, next) => {
           next(err);
           return;
         }
-        res.render("services/confirm", {
+        res.render("services/booked", {
           careGiver: updatedCareGiver
         });
       });
@@ -125,6 +124,73 @@ router.get("/dashboard", (req, res, next) => {
         req: req
       });
     });
+});
+
+router.get("/services/:id/edit", (req, res, next) => {
+  const caregiverId = req.params.id;
+  User.findById(caregiverId, (err, careGiver) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    res.render("services/edit", {
+      careGiver: careGiver
+    });
+  });
+});
+
+router.post("/services/:id/", (req, res, next) => {
+  User.findByIdAndUpdate(
+    req.params.id,
+    {
+      username: req.body.username,
+      name: req.body.name,
+      familyName: req.body.familyName,
+      email: req.body.email,
+      address: req.body.address,
+      country: req.body.country,
+      city: req.body.city,
+      zipCode: req.body.zipCode,
+      phoneNumber: req.body.phoneNumber,
+      role: req.body.role,
+      service: req.body.service,
+      price: req.body.price,
+      mobility: req.body.mobility,
+      nationality: req.body.nationality,
+      description: req.body.description,
+      pictures: req.body.pictures
+    },
+    (err, user) => {
+      if (err) next(err);
+      res.redirect("/services/" + req.params.id);
+    }
+  );
+});
+
+router.get("/services/:id/confirm", (req, res, next) => {
+  const serviceId = req.params.id;
+  Service.findById(serviceId)
+    .populate("careGiver", "name")
+    .populate("careTaker", "name")
+    .exec((err, service) => {
+      if (err) {
+        next(err);
+        return;
+      }
+
+      res.render("services/confirm", {
+        service: service,
+        req: req
+      });
+    });
+});
+
+router.post("/services/:id/confirm/final", (req, res, next) => {
+  const serviceId = req.params.id;
+  Service.findByIdAndUpdate(serviceId, { confirmed: true }, (err, service) => {
+    if (err) next(err);
+    res.render("services/confirmation");
+  });
 });
 
 module.exports = router;

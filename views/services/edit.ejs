@@ -1,0 +1,107 @@
+<h2>Edit your profile</h2>
+
+<form id="form" action="/services/<%= user._id%>" method="POST">
+
+<label>
+Username:
+<input type="text" name="username" placeholder="<%=user.username%>">
+</label>
+<br>
+<label>
+Name:
+<input type="text" name="name" placeholder="<%=user.name%>">
+</label>
+<br>
+<label>
+Family name:
+<input type="text" name="familyName" placeholder="<%=user.familyName%>">
+</label>
+<br>
+<label>
+E-mail:
+<input type="email" name="email" placeholder="<%=user.email%>">
+</label>
+<br>
+<label>
+Password:
+<input type="password" name="password">
+</label>
+<br>
+<label>
+Address:
+<input type="text" name="address" placeholder="<%=user.address%>">
+</label>
+<br>
+<label>
+Country:
+<input type="text" name="country" placeholder="<%=user.country%>">
+</label>
+<br>
+<label>
+City:
+<input type="text" name="city" placeholder="<%=user.city%>">
+</label>
+<br>
+<label>
+Zip Code:
+<input type="number" name="zipCode" placeholder="<%=user.zipCode%>">
+</label>
+<br>
+<label>
+Phone number:
+<input type="text" name="phoneNumber" placeholder="<%=user.phoneNumber%>">
+</label>
+<br>
+<label>
+Role:
+<select name="role">
+  <option value="careGiver">Care giver</option>
+  <option value="careTaker">Care taker</option>
+</select>
+</label>
+<br>
+<label>
+Care type:
+<select name="service">
+  <option value="activity">Activity</option>
+  <option value="company">Company</option>
+  <option value="support">Support</option>
+  <option value="professionalCare">Professional care</option>
+</select>
+</label>
+<br>
+<label>
+Price:
+<input type="number" name="price" placeholder="<%=user.price%>">
+</label>
+<br>
+<label>
+Mobility:
+<select name="mobility">
+  <option value="true">Yes</option>
+  <option value="false">No</option>
+</select>
+</label>
+<br>
+<label>
+Nationality:
+<select name="nationality">
+  <option value="mexico">Mexican</option>
+  <option value="france">French</option>
+</select>
+</label>
+<br>
+<label>
+Description:
+<input type="text" name="description" placeholder="<%=user.description%>">
+</label>
+<br>
+<label>
+Picture URL:
+<input type="text" name="pictures" placeholder="<%=user.pictures%>">
+</label>
+<br>
+
+
+<button>Save changes</button>
+</form>

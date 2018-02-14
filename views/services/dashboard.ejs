@@ -1,5 +1,5 @@
 <% if (req.user.role === "admin") { %>
-  <h3> Hello <%= req.user.name%> </h3>
+  <h3> Hello <%= req.user.name%> </h3> <a href="/services/<%= user._id %>/edit">Edit your profile</a>
   <p>Your confirmed requests:</p>
   <ul>
   <% services.filter(service => service.confirmed === true).forEach((service) => { %>
@@ -27,7 +27,7 @@
   <% }) %>
 </ul>
 <% } else { %>
-<h3> Hello <%= req.user.name%> </h3>
+<h3> Hello <%= req.user.name%> </h3> <a href="/services/<%= user._id %>/edit">Edit your profile</a>
 <p>Your upcoming requests:</p>
 <ul>
 <% services.filter(service => service.confirmed === true).forEach((service) => { %>
