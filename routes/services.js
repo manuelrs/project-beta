@@ -72,7 +72,8 @@ router.post("/services/:id/book", ensureLoggedIn(), (req, res, next) => {
     zipCode: zipCode,
     service: service,
     city: city,
-    price: price
+    price: price,
+    bookedDates: bookedDate
   };
 
   User.findByIdAndUpdate(
@@ -158,7 +159,12 @@ router.post("/services/:id/", (req, res, next) => {
       mobility: req.body.mobility,
       nationality: req.body.nationality,
       description: req.body.description,
-      pictures: req.body.pictures
+      pictures: req.body.pictures,
+      medicament1: req.body.medicament1,
+      medicament2: req.body.medicament2,
+      medicament3: req.body.medicament3,
+      medicament4: req.body.medicament4,
+      medicament5: req.body.medicament5
     },
     (err, user) => {
       if (err) next(err);
@@ -179,8 +185,7 @@ router.get("/services/:id/confirm", (req, res, next) => {
       }
 
       res.render("services/confirm", {
-        service: service,
-        req: req
+        service: service
       });
     });
 });
@@ -190,6 +195,42 @@ router.post("/services/:id/confirm/final", (req, res, next) => {
   Service.findByIdAndUpdate(serviceId, { confirmed: true }, (err, service) => {
     if (err) next(err);
     res.render("services/confirmation");
+  });
+});
+
+router.get("/services/:id/decline", (req, res, next) => {
+  const serviceId = req.params.id;
+  Service.findById(serviceId)
+    .populate("careGiver", "name")
+    .populate("careTaker", "name")
+    .exec((err, service) => {
+      if (err) {
+        next(err);
+        return;
+      }
+
+      res.render("services/decline", {
+        service: service
+      });
+    });
+});
+
+router.post("/services/:id/decline/final", (req, res, next) => {
+  const serviceId = req.params.id;
+  Service.findByIdAndUpdate(serviceId, { declined: true }, (err, service) => {
+    if (err) next(err);
+    res.render("services/declined");
+  });
+});
+
+router.get("/services/:id/complete", (req, res, next) => {
+  const serviceId = req.params.id;
+  Service.findById(serviceId, (err, service) => {
+    if (err) next(err);
+    User.findById(service.careTaker, (err, careTaker) => {
+      if (err) next(err);
+      res.render("services/complete", { careTaker: careTaker });
+    });
   });
 });
 

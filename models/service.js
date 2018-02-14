@@ -40,6 +40,10 @@ const serviceSchema = new Schema({
   confirmed: {
     type: Boolean,
     default: false
+  },
+  declined: {
+    type: Boolean,
+    default: false
   }
 });
 

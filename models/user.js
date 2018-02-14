@@ -83,6 +83,21 @@ const userSchema = new Schema({
   },
   pictures: {
     type: Array
+  },
+  medicament1: {
+    type: String
+  },
+  medicament2: {
+    type: String
+  },
+  medicament3: {
+    type: String
+  },
+  medicament4: {
+    type: String
+  },
+  medicament5: {
+    type: String
   }
 });
 

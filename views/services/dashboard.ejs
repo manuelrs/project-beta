@@ -4,7 +4,7 @@
   <ul>
   <% services.filter(service => service.confirmed === true).forEach((service) => { %>
     <li>
-      <h4> <%= service.service %> </h4>
+      <h4> <%= service.service %> on <%= service.bookedDates[0] %> </h4>
 
       <ul>
         <li> <b>Care taker</b>: <%= service.careTaker.name %> </li>
@@ -15,9 +15,9 @@
 </ul>
 <p>Your pending requests:</p>
   <ul>
-  <% services.filter(service => service.confirmed === false).forEach((service) => { %>
+  <% services.filter(service => service.confirmed === false).filter(service => service.declined === false).forEach((service) => { %>
     <li>
-      <h4> <%= service.service %> </h4>
+      <h4> <%= service.service %> on <%= service.bookedDates[0]%> </h4>
 
       <ul>
         <li> <b>Care taker</b>: <%= service.careTaker.name %> </li>
@@ -32,20 +32,21 @@
 <ul>
 <% services.filter(service => service.confirmed === true).forEach((service) => { %>
   <li>
-    <h4> <%= service.service %> </h4>
+    <h4> <%= service.service %> on <%= service.bookedDates[0]%></h4>
 
     <ul>
       <li> <b>Care taker</b>: <%= service.careTaker.name %> </li>
       <li> <b>Care giver</b>: <%= service.careGiver.name %> </li>
+      <a href="/services/<%= service._id %>/complete">Complete care</a>
     </ul>
   </li>
 <% }) %>
 </ul>
 <p>Your open requests:</p>
 <ul>
-<% services.filter(service => service.confirmed === false).forEach((service) => { %>
+<% services.filter(service => service.confirmed === false).filter(service => service.declined === false).forEach((service) => { %>
   <li>
-    <h4> <%= service.service %> </h4>
+    <h4> <%= service.service %> on <%= service.bookedDates[0]%></h4>
 
     <ul>
       <li> <b>Care taker</b>: <%= service.careTaker.name %> </li>
@@ -57,3 +58,10 @@
 <% }) %>
 </ul>
 <% } %>
+
+<%
+function toDate(dateStr) {
+    const [year, month, day] = dateStr.split("-")
+    return new Date(year, month - 1, day)
+}
+%>

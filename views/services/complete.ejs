@@ -1,0 +1,49 @@
+<form method="POST" action="/services/:id/complete">
+<h3>Vitals</h3>
+  <label>
+    Heart rate:
+    <input type="text" name="heartRate">
+  </label>
+  <br>
+  <label>
+    Oxigenation:
+    <input type="text" name="oxigenation">
+  </label>
+  <br>
+  <label>
+    Mood:
+    <input type="text" name="mood">
+  </label>
+  <br>
+  <h3>Medication dosage in mg</h3>
+  <label>
+    <%= careTaker.medicament1%>
+    <input type="text" name="medication1">
+  </label>
+  <br>
+  <label>
+  <%= careTaker.medicament2%>
+  <input type="text" name="medication2">
+</label>
+  <br>
+  <label>
+  <%= careTaker.medicament3%>
+  <input type="text" name="medication3">
+</label>
+  <br>
+  <label>
+  <%= careTaker.medicament4%>
+  <input type="text" name="medication4">
+</label>
+  <br>
+  <label>
+  <%= careTaker.medicament5%>
+  <input type="text" name="medication5">
+</label>
+  <br>
+  <h3>Comments</h3>
+  <input type="text" name="comments">
+  <br><br>
+  
+  <button>Send patient data</button>
+</form>
