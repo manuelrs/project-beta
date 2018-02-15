@@ -1,7 +1,29 @@
+<%
+const comments = [];
+const ratings = [];
+const dates = [];
+for (var i = 0; i < careGiver.feedback.length; i++) {
+  comments.push(careGiver.feedback[i].comment);
+  ratings.push(careGiver.feedback[i].rating);
+  dates.push(careGiver.feedback[i].date);
+}
+%>
+
 <img src="<%=careGiver.pictures[0]%>" width ="800" height ="600"> <br/>
 <h2><%= careGiver.name%> <%= careGiver.familyName%></h2>
 <span>Address: <%= careGiver.address %>, <%= careGiver.city %>, <%= careGiver.country %> </span> <br/>
 <span>About me: <%= careGiver.description %> </span> 
+<li>
+    <ul>
+<% comments.forEach((comment) => { %>
+  
+      <li> <b>Comment</b>: <%= comment %> </li>
+    
+<% }) %>
+</ul>
+  </li>
+</ul>
+</ul>
 <form method="POST" action="/services/<%= careGiver._id %>/book">
 <label>
 Care type:

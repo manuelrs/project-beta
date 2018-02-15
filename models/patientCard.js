@@ -34,6 +34,10 @@ const patientCardSchema = new Schema({
   },
   careTakerId: {
     type: String
+  },
+  completed: {
+    type: Boolean,
+    default: false
   }
 });
 

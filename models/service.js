@@ -48,6 +48,10 @@ const serviceSchema = new Schema({
   logged: {
     type: Boolean,
     default: false
+  },
+  rated: {
+    type: Boolean,
+    default: false
   }
 });
 

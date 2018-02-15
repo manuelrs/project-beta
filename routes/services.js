@@ -192,7 +192,7 @@ router.post("/services/:id/confirm/final", (req, res, next) => {
   const serviceId = req.params.id;
   Service.findByIdAndUpdate(serviceId, { confirmed: true }, (err, service) => {
     if (err) next(err);
-    res.render("services/confirmation");
+    res.render("services/confirmation", { message: "your confirmation." });
   });
 });
 
@@ -255,6 +255,9 @@ router.post("/services/:id/complete", (req, res, next) => {
               medicament5: req.body.medicament5,
               comments: req.body.comments
             }
+          },
+          $set: {
+            completed: true
           }
         },
         (err, patientCard) => {
@@ -263,14 +266,75 @@ router.post("/services/:id/complete", (req, res, next) => {
             req.params.id,
             { logged: true },
             (err, service) => {
-              if (err) next(err);
-              res.render("/dashboard/");
+              if (err) {
+                next(err);
+              }
+              res.render("services/confirmation", {
+                message: "updating the patient's info."
+              });
             }
           );
         }
       );
     });
   });
+});
+
+router.get("/services/:id/rate", (req, res, next) => {
+  Service.findById(req.params.id, (err, service) => {
+    if (err) next(err);
+    User.findById(service.careGiver, (err, careGiver) => {
+      if (err) next(err);
+      console.log(careGiver);
+      res.render("services/rate", {
+        service: service,
+        careGiver: careGiver
+      });
+    });
+  });
+});
+
+router.post("/services/:id/rate", (req, res, next) => {
+  const serviceId = req.params.id;
+  const comment = req.body.comment;
+  const rating = req.body.rating;
+  Service.findByIdAndUpdate(
+    serviceId,
+    { $set: { rated: true } },
+    (err, service) => {
+      if (err) next(err);
+      User.findByIdAndUpdate(
+        service.careGiver,
+        {
+          $push: {
+            feedback: {
+              comment: comment,
+              rating: rating,
+              date: Date.now()
+            }
+          }
+        },
+        (err, careGiver) => {
+          if (err) next(err);
+          res.render("services/confirmation", {
+            message: "for your feedback."
+          });
+        }
+      );
+    }
+  );
+});
+
+router.post("/services/:id/skip", (req, res, next) => {
+  const serviceId = req.params.id;
+  Service.findByIdAndUpdate(
+    serviceId,
+    { $set: { rated: true } },
+    (err, service) => {
+      if (err) next(err);
+      res.redirect("/dashboard");
+    }
+  );
 });
 
 router.get("/services/:id/history", ensureLoggedIn(), (req, res, next) => {

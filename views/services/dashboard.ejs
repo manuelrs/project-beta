@@ -1,5 +1,23 @@
 <% if (req.user.role === "careTaker") { %>
   <h3> Hello <%= req.user.name%> </h3> <a href="/services/<%= user._id %>/edit">Edit your profile</a> <a href="/services/<%= user._id %>/history">Show your attention history</a>
+  <p>Your past requests:</p>
+  <ul>
+  <% services.filter(service => service.confirmed === true).filter(service => service.logged === true).filter(service => service.rated === false).forEach((service) => { %>
+    <li>
+      <h4> <%= service.service %> on <%= service.bookedDates[0] %> </h4>
+
+      <ul>
+        <li> <b>Care taker</b>: <%= service.careTaker.name %> </li>
+        <li> <b>Care giver</b>: <%= service.careGiver.name %> </li>
+        <a href="/services/<%= service._id %>/rate">Rate the care giver</a>
+        <form method="POST" action="/services/<%= service._id %>/skip">
+	        <button>Already rated</button>
+        </form>
+      </ul>
+    </li>
+  <% }) %>
+</ul>
+
   <p>Your confirmed requests:</p>
   <ul>
   <% services.filter(service => service.confirmed === true).forEach((service) => { %>

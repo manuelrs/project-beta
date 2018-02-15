@@ -81,6 +81,9 @@ const userSchema = new Schema({
   feedback: {
     type: Array
   },
+  rating: {
+    type: Array
+  },
   pictures: {
     type: Array
   },
