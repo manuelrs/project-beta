@@ -7,6 +7,7 @@ const passport = require("passport");
 const bcrypt = require("bcrypt");
 const saltRounds = 14;
 const { ensureLoggedIn, ensureLoggedOut } = require("connect-ensure-login");
+const moment = require("moment");
 
 router.get("/services", (req, res, next) => {
   User.find({ role: "careGiver" }, (err, careGiversList) => {
@@ -25,7 +26,12 @@ router.post("/search", (req, res, next) => {
   const city = req.body.city;
   const bookedDate = req.body.bookedDate;
   User.find(
-    { service: service, city: city, bookedDates: { $ne: bookedDate } },
+    {
+      role: "careGiver",
+      service: service,
+      city: city,
+      bookedDates: { $ne: bookedDate }
+    },
     (err, careGiversList) => {
       if (err) {
         next(err);
@@ -118,9 +124,14 @@ router.get("/dashboard", (req, res, next) => {
         next(err);
         return;
       }
-      res.render("services/dashboard", {
-        services: services,
-        req: req
+      User.find({}, (err, users) => {
+        if (err) next(err);
+        res.render("services/dashboard", {
+          services: services,
+          req: req,
+          moment: moment,
+          users: users
+        });
       });
     });
 });

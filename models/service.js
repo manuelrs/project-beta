@@ -26,7 +26,7 @@ const serviceSchema = new Schema({
   },
   service: {
     type: String,
-    enum: ["activity", "company", "support", "professionalCare"],
+    enum: ["company", "support", "professionalCare"],
     default: "company"
   },
   price: {

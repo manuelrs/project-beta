@@ -17,6 +17,7 @@
   <li><a href="/signup"> Sign up </a></li>
   <li><a href="/login"> Login </a></li>
   <% } else { %>
+  <li><a href="/services/<%= user._id%>/edit"><%= user.name%></a></li>
   <li><a href="/services"> Services </a></li>
   <li><a href="/dashboard"> Dashboard </a></li>
   <li class="divider"></li>
@@ -24,25 +25,31 @@
   <%}%>
 </ul>
 <nav class="light-blue lighten-1" role="navigation">
-    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Care Network</a>
+    <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo">Care Network</a>
       <ul class="right hide-on-med-and-down">
         <!-- Dropdown Trigger -->
+      <% if (user) { %>
+      <li><a href="/services/<%= user._id %>/history">Your cockpit</a></li>
+      <%}%>
       <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Profile<i class="material-icons right">arrow_drop_down</i></a></li>
       </ul>
 
       <ul id="nav-mobile" class="side-nav">
-        <li><a href="/"> Home </a></li>
+      <% if (!user) { %>
         <li><a href="/signup"> Sign up </a></li>
         <li><a href="/login"> Login </a></li>
+        <% } else { %>
+        <li><a href="/services/<%= user._id%>/edit"><%= user.name%></a></li>
         <li><a href="/services"> Services </a></li>
         <li><a href="/dashboard"> Dashboard </a></li>
+        <li class="divider"></li>
         <li><a href="/logout"> Logout </a></li>
+        <%}%>
         
       </ul>
       <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
     </div>
   </nav>
-
 <header>
 </header>
 <body>
