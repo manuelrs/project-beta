@@ -52,14 +52,15 @@ Phone number:
 <input type="text" name="phoneNumber" placeholder="<%=user.phoneNumber%>" value="<%=user.phoneNumber%>">
 </label>
 <br>
-<label>
-Role:
-<select name="role" placeholder="<%=user.role%>" value="<%=user.role%>">
-  <option value="careGiver">Care giver</option>
-  <option value="careTaker">Care taker</option>
-</select>
-</label>
-<br>
+<div class="input-field">
+    <select name="role">
+      <option value="" disabled selected>Choose one option</option>
+      <option value="careGiver">Care giver</option>
+      <option value="careTaker">Care taker</option>
+    </select>
+    <label>Role</label>
+  </div>
+  <br>
 <label>
 Care type:
 <select name="service" placeholder="<%=user.service%>" value="<%=user.service%>">
@@ -73,22 +74,6 @@ Care type:
 <label>
 Price:
 <input type="number" name="price" placeholder="<%=user.price%>" value="<%=user.price%>">
-</label>
-<br>
-<label>
-Mobility:
-<select name="mobility" placeholder="<%=user.mobility%>" value="<%=user.mobility%>">
-  <option value="true">Yes</option>
-  <option value="false">No</option>
-</select>
-</label>
-<br>
-<label>
-Nationality:
-<select name="nationality" placeholder="<%=user.nationality%>" value="<%=user.nationality%>">
-  <option value="mexico">Mexican</option>
-  <option value="france">French</option>
-</select>
 </label>
 <br>
 <label>

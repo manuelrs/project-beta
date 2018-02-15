@@ -1,13 +1,12 @@
 <% if (req.user.role === "careTaker") { %>
   <h3> Hello <%= req.user.name%> </h3> <a href="/services/<%= user._id %>/edit">Edit your profile</a> <a href="/services/<%= user._id %>/history">Show your attention history</a>
-  <p>Your past requests:</p>
+  <h5>Your past requests:</h5>
   <ul>
   <% services.filter(service => service.confirmed === true).filter(service => service.logged === true).filter(service => service.rated === false).forEach((service) => { %>
     <li>
-      <h4> <%= service.service %> on <%= service.bookedDates[0] %> </h4>
+      <h6> <%= service.service %> on <%= service.bookedDates[0] %> </h6>
 
       <ul>
-        <li> <b>Care taker</b>: <%= service.careTaker.name %> </li>
         <li> <b>Care giver</b>: <%= service.careGiver.name %> </li>
         <a href="/services/<%= service._id %>/rate">Rate the care giver</a>
         <form method="POST" action="/services/<%= service._id %>/skip">
@@ -18,27 +17,25 @@
   <% }) %>
 </ul>
 
-  <p>Your confirmed requests:</p>
+  <h5>Your confirmed requests:</h5>
   <ul>
   <% services.filter(service => service.confirmed === true).forEach((service) => { %>
     <li>
-      <h4> <%= service.service %> on <%= service.bookedDates[0] %> </h4>
+      <h6> <%= service.service %> on <%= service.bookedDates[0] %> </h6>
 
       <ul>
-        <li> <b>Care taker</b>: <%= service.careTaker.name %> </li>
         <li> <b>Care giver</b>: <%= service.careGiver.name %> </li>
       </ul>
     </li>
   <% }) %>
 </ul>
-<p>Your pending requests:</p>
+<h5>Your pending requests:</h5>
   <ul>
   <% services.filter(service => service.confirmed === false).filter(service => service.declined === false).forEach((service) => { %>
     <li>
-      <h4> <%= service.service %> on <%= service.bookedDates[0]%> </h4>
+      <h6> <%= service.service %> on <%= service.bookedDates[0]%> </h6>
 
       <ul>
-        <li> <b>Care taker</b>: <%= service.careTaker.name %> </li>
         <li> <b>Care giver</b>: <%= service.careGiver.name %> </li>
       </ul>
     </li>
@@ -46,29 +43,27 @@
 </ul>
 <% } else { %>
 <h3> Hello <%= req.user.name%> </h3> <a href="/services/<%= user._id %>/edit">Edit your profile</a>
-<p>Your upcoming requests:</p>
+<h5>Your upcoming requests:</h5>
 <ul>
 <% services.filter(service => service.confirmed === true).filter(service => service.logged === false).forEach((service) => { %>
   <li>
-    <h4> <%= service.service %> on <%= service.bookedDates[0]%></h4>
+    <h6> <%= service.service %> on <%= service.bookedDates[0]%></h6>
 
     <ul>
       <li> <b>Care taker</b>: <%= service.careTaker.name %> </li>
-      <li> <b>Care giver</b>: <%= service.careGiver.name %> </li>
       <a href="/services/<%= service._id %>/complete">Complete care</a>
     </ul>
   </li>
 <% }) %>
 </ul>
-<p>Your open requests:</p>
+<h5>Your open requests:</h5>
 <ul>
 <% services.filter(service => service.confirmed === false).filter(service => service.declined === false).forEach((service) => { %>
   <li>
-    <h4> <%= service.service %> on <%= service.bookedDates[0]%></h4>
+    <h6> <%= service.service %> on <%= service.bookedDates[0]%></h6>
 
     <ul>
       <li> <b>Care taker</b>: <%= service.careTaker.name %> </li>
-      <li> <b>Care giver</b>: <%= service.careGiver.name %> </li>
       <a href="/services/<%= service._id %>/confirm">Confirm service</a>
       <a href="/services/<%= service._id %>/decline">Decline service</a>
     </ul>

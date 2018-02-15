@@ -7,33 +7,43 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Care network</title>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
-  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="/stylesheets/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
 </head>
-
+<ul id="dropdown1" class="dropdown-content">
+<% if (!user) { %>
+  <li><a href="/signup"> Sign up </a></li>
+  <li><a href="/login"> Login </a></li>
+  <% } else { %>
+  <li><a href="/services"> Services </a></li>
+  <li><a href="/dashboard"> Dashboard </a></li>
+  <li class="divider"></li>
+  <li><a href="/logout"> Logout </a></li>
+  <%}%>
+</ul>
 <nav class="light-blue lighten-1" role="navigation">
-    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Logo</a>
+    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Care Network</a>
       <ul class="right hide-on-med-and-down">
-        <li><a href="#">Navbar Link</a></li>
+        <!-- Dropdown Trigger -->
+      <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Profile<i class="material-icons right">arrow_drop_down</i></a></li>
       </ul>
 
       <ul id="nav-mobile" class="side-nav">
-        <li><a href="#">Navbar Link</a></li>
+        <li><a href="/"> Home </a></li>
+        <li><a href="/signup"> Sign up </a></li>
+        <li><a href="/login"> Login </a></li>
+        <li><a href="/services"> Services </a></li>
+        <li><a href="/dashboard"> Dashboard </a></li>
+        <li><a href="/logout"> Logout </a></li>
+        
       </ul>
       <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
     </div>
   </nav>
-  
+
 <header>
-<a href="/"> Home </a>
-<a href="/signup"> Sign up </a>
-<a href="/login"> Login </a>
-<a href="/services"> Services </a>
-<a href="/dashboard"> Dashboard </a>
-<a href="/logout"> Logout </a>
 </header>
 <body>
   <%- body %>
@@ -41,6 +51,7 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.js"></script>
+<script src="/javascripts/init.js"></script>
 </body>
 
 </html>
