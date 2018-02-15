@@ -70,10 +70,6 @@ const userSchema = new Schema({
     type: Boolean,
     default: false
   },
-  nationality: {
-    type: String,
-    default: ""
-  },
   description: {
     type: String,
     default: ""

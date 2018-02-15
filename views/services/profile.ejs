@@ -2,10 +2,12 @@
 const comments = [];
 const ratings = [];
 const dates = [];
+if (careGiver.feedback){
 for (var i = 0; i < careGiver.feedback.length; i++) {
   comments.push(careGiver.feedback[i].comment);
   ratings.push(careGiver.feedback[i].rating);
   dates.push(careGiver.feedback[i].date);
+}
 }
 %>
 
