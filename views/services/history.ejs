@@ -1,64 +1,54 @@
-<%
-const heartRates = [];
-const oxigenation = [];
-const mood = [];
-const medicament1 = [];
-const medicament2 = [];
-const medicament3 = [];
-const medicament4 = [];
-const medicament5 = [];
-const comments = [];
-
-for (var i = 0; i < patientCard.patientInfo.length; i++) {
-    heartRates.push(patientCard.patientInfo[i].heartRate);
-    oxigenation.push(patientCard.patientInfo[i].oxigenation);
-    medicament1.push(patientCard.patientInfo[i].medicament1);
-    medicament2.push(patientCard.patientInfo[i].medicament2);
-    medicament3.push(patientCard.patientInfo[i].medicament4);
-    medicament4.push(patientCard.patientInfo[i].medicament5);
-    medicament5.push(patientCard.patientInfo[i].medicament6);
-    comments.push(patientCard.patientInfo[i].comments);
+<style>
+.chartWrapper{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
 }
 
-%>
+</style>
 
 
 <script>
     var heartRates = {
-        labels: [1500,1600,1700,1750,1800,1850,1900,1950,1999,2050],
+      labels: [1,2,3,4,5,6,7,8,9,10],
         datasets: [{ 
-            data: [86,114,106,106,107,111,133,221,783,2478],
-            label: "Africa",
-            borderColor: "#3e95cd",
-            fill: false
-          }, { 
-            data: [282,350,411,502,635,809,947,1402,3700,5267],
-            label: "Asia",
-            borderColor: "#8e5ea2",
-            fill: false
-          }, { 
-            data: [168,170,178,190,203,276,408,547,675,734],
-            label: "Europe",
-            borderColor: "#3cba9f",
-            fill: false
-          }, { 
-            data: [40,20,10,16,24,38,74,167,508,784],
-            label: "Latin America",
-            borderColor: "#e8c3b9",
-            fill: false
-          }, { 
-            data: [6,3,2,2,7,26,82,172,312,433],
-            label: "North America",
-            borderColor: "#c45850",
+            data: [80,83,82,82,87,96,82,110,111,104],
+            label: "Heart rate (bpm)",
+            borderColor: "#2AB8AA",
             fill: false
           }
         ]
       };
+
+      var oxigenation = {
+        labels: [1,2,3,4,5,6,7,8,9,10],
+          datasets: [{ 
+              data: [86,83,82,82,87,55,60,88,60,72],
+              label: "Oxigenation (%)",
+              borderColor: "#29B6F6",
+              fill: false
+            }
+          ]
+        };
 </script>
 
-<p>Patient history:</p>
-<canvas id="myChart1" width="200" height="100"></canvas>
-<canvas id="myChart2" width="200" height="100"></canvas>
+<h5>Patient overview:</h5>
+<div class="section"></div>
+  <div class="row">
+    <div class="col s12 m6 l6">
+      <canvas width="500" id="myChart1" ></canvas>
+    </div>
+    <div class="col s12 m6 l6">
+      <canvas width="500" id="myChart2" ></canvas>
+    </div>
+  </div>
+</div>
+
+<h5>Comments:</h5>
+
+<% patientCard[0].patientInfo.forEach((info) => { %>
+<%= info.careGiver.name %> wrote on <%= moment(info.date).format("LL")%>  <%= info.comments %> <br>
+<% })%>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.js"></script>
 <script src="/javascripts/myChart.js"></script> 

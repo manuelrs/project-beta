@@ -1,49 +1,85 @@
-<form method="POST" action="/services/<%= service._id %>/complete">
-<h3>Vitals</h3>
-  <label>
-    Heart rate:
-    <input type="text" name="heartRate">
-  </label>
-  <br>
-  <label>
-    Oxigenation:
-    <input type="text" name="oxigenation">
-  </label>
-  <br>
-  <label>
-    Mood:
-    <input type="text" name="mood">
-  </label>
-  <br>
-  <h3>Medication dosage in mg</h3>
-  <label>
-    <%= careTaker.medicament1%>
-    <input type="text" name="medicament1">
-  </label>
-  <br>
-  <label>
-  <%= careTaker.medicament2%>
-  <input type="text" name="medicament2">
-</label>
-  <br>
-  <label>
-  <%= careTaker.medicament3%>
-  <input type="text" name="medicament3">
-</label>
-  <br>
-  <label>
-  <%= careTaker.medicament4%>
-  <input type="text" name="medicament4">
-</label>
-  <br>
-  <label>
-  <%= careTaker.medicament5%>
-  <input type="text" name="medicament5">
-</label>
-  <br>
-  <h3>Comments</h3>
-  <input type="text" name="comments">
-  <br><br>
-  
-  <button>Send patient data</button>
-</form>
+
+<div class="section"></div>
+<div class="row">
+  <form method="post" action="/services/<%= service._id %>/complete">
+  <h5> <%=careTaker.name%>'s status on <%= moment(service.bookedDates[0]).format("LL") %></h5>
+  <h5>Vitals</h5>
+
+  <div class='row'>
+    <div class='input-field col s12 l6'>
+      <input class='validate' type='text' name='heartRate' id='heartRate' />
+      <label for='heartRate'>Heart rate</label>
+    </div>
+  </div>
+
+  <div class='row'>
+    <div class='input-field col s12 l6'>
+      <input class='validate' type='text' name='oxigenation' id='oxigenation' />
+      <label for='oxigenation'>Oxigenation</label>
+    </div>
+  </div>
+
+  <div class='row'>
+    <div class='input-field col s12 l6'>
+      <input class='validate' type='text' name='mood' id='mood' />
+      <label for='mood'>Mood (1-100)</label>
+    </div>
+  </div>
+
+  <h5>Medication dosage in mg</h5>
+
+  <div class='row'>
+    <div class='input-field col s12 l6'>
+      <input class='validate' type='text' name='medicament1' id='medicament1' />
+      <label for='medicament1'><%= careTaker.medicament1%></label>
+    </div>
+  </div>
+
+  <div class='row'>
+    <div class='input-field col s12 l6'>
+      <input class='validate' type='text' name='medicament2' id='medicament2' />
+      <label for='medicament2'><%= careTaker.medicament2%></label>
+    </div>
+  </div>
+
+  <div class='row'>
+    <div class='input-field col s12 l6'>
+      <input class='validate' type='text' name='medicament3' id='medicament3' />
+      <label for='medicament3'><%= careTaker.medicament3%></label>
+    </div>
+  </div>
+
+  <div class='row'>
+    <div class='input-field col s12 l6'>
+      <input class='validate' type='text' name='medicament4' id='medicament4' />
+      <label for='medicament4'><%= careTaker.medicament4%></label>
+    </div>
+  </div>
+
+  <div class='row'>
+    <div class='input-field col s12 l6'>
+      <input class='validate' type='text' name='medicament5' id='medicament5' />
+      <label for='medicament5'><%= careTaker.medicament5%></label>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="input-field col s12 l6">
+      <textarea type='text' name='comments' id='comments' class="validate materialize-textarea"></textarea>
+      <label for="comments">Please write a patient summary</label>
+    </div>
+  </div>  
+
+    <div class="section"></div>
+
+    <center>
+    <div class="col s12 l4">
+      <div class='row'>
+        <div class='input-field col s12'>
+          <button type='submit' name='btn_login' class='col s12 btn btn-large waves-effect blue'>Send patient data</button>
+        </div>
+      </div>
+    </div>
+    </center>
+  </form>
+</div>

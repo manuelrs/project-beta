@@ -192,9 +192,13 @@ router.get("/services/:id/confirm", (req, res, next) => {
         next(err);
         return;
       }
-
-      res.render("services/confirm", {
-        service: service
+      User.findById(service.careTaker, (err, careTaker) => {
+        if (err) next(err);
+        res.render("services/confirm", {
+          service: service,
+          careTaker: careTaker,
+          moment: moment
+        });
       });
     });
 });
@@ -240,7 +244,8 @@ router.get("/services/:id/complete", (req, res, next) => {
       if (err) next(err);
       res.render("services/complete", {
         careTaker: careTaker,
-        service: service
+        service: service,
+        moment: moment
       });
     });
   });
@@ -249,40 +254,48 @@ router.get("/services/:id/complete", (req, res, next) => {
 router.post("/services/:id/complete", (req, res, next) => {
   Service.findById(req.params.id, (err, service) => {
     if (err) next(err);
-    PatientCard.find({ careTakerId: service.careTaker }, (err, patientCard) => {
+    User.findById(service.careGiver, (err, careGiver) => {
       if (err) next(err);
-      PatientCard.findByIdAndUpdate(
-        patientCard[0]._id,
-        {
-          $push: {
-            patientInfo: {
-              heartRate: req.body.heartRate,
-              oxigenation: req.body.oxigenation,
-              mood: req.body.mood,
-              medicament1: req.body.medicament1,
-              medicament2: req.body.medicament2,
-              medicament3: req.body.medicament3,
-              medicament4: req.body.medicament4,
-              medicament5: req.body.medicament5,
-              comments: req.body.comments
-            }
-          },
-          $set: {
-            completed: true
-          }
-        },
+      PatientCard.find(
+        { careTakerId: service.careTaker },
         (err, patientCard) => {
           if (err) next(err);
-          Service.findByIdAndUpdate(
-            req.params.id,
-            { logged: true },
-            (err, service) => {
-              if (err) {
-                next(err);
+          PatientCard.findByIdAndUpdate(
+            patientCard[0]._id,
+            {
+              $push: {
+                patientInfo: {
+                  heartRate: req.body.heartRate,
+                  oxigenation: req.body.oxigenation,
+                  mood: req.body.mood,
+                  medicament1: req.body.medicament1,
+                  medicament2: req.body.medicament2,
+                  medicament3: req.body.medicament3,
+                  medicament4: req.body.medicament4,
+                  medicament5: req.body.medicament5,
+                  comments: req.body.comments,
+                  careGiver: careGiver,
+                  date: Date.now()
+                }
+              },
+              $set: {
+                completed: true
               }
-              res.render("services/confirmation", {
-                message: "updating the patient's info."
-              });
+            },
+            (err, patientCard) => {
+              if (err) next(err);
+              Service.findByIdAndUpdate(
+                req.params.id,
+                { logged: true },
+                (err, service) => {
+                  if (err) {
+                    next(err);
+                  }
+                  res.render("services/confirmation", {
+                    message: "updating the patient's info."
+                  });
+                }
+              );
             }
           );
         }
@@ -296,7 +309,6 @@ router.get("/services/:id/rate", (req, res, next) => {
     if (err) next(err);
     User.findById(service.careGiver, (err, careGiver) => {
       if (err) next(err);
-      console.log(careGiver);
       res.render("services/rate", {
         service: service,
         careGiver: careGiver
@@ -309,6 +321,8 @@ router.post("/services/:id/rate", (req, res, next) => {
   const serviceId = req.params.id;
   const comment = req.body.comment;
   const rating = req.body.rating;
+  const careTakerName = req.user.name;
+  const careTakerPicture = req.user.pictures[0];
   Service.findByIdAndUpdate(
     serviceId,
     { $set: { rated: true } },
@@ -321,7 +335,9 @@ router.post("/services/:id/rate", (req, res, next) => {
             feedback: {
               comment: comment,
               rating: rating,
-              date: Date.now()
+              date: Date.now(),
+              careTaker: careTakerName,
+              careTakerPicture: careTakerPicture
             }
           }
         },
@@ -351,7 +367,11 @@ router.post("/services/:id/skip", (req, res, next) => {
 router.get("/services/:id/history", ensureLoggedIn(), (req, res, next) => {
   PatientCard.find({ careTakerId: req.params.id }, (err, patientCard) => {
     if (err) next(err);
-    res.render("services/history", { patientCard: patientCard[0] });
+    console.log(patientCard[0].patientInfo);
+    res.render("services/history", {
+      patientCard: patientCard,
+      moment: moment
+    });
   });
 });
 

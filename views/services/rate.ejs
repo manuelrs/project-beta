@@ -1,64 +1,42 @@
-<form method="POST" action="/services/<%= service._id %>/rate">
-<h5>Rate the care received by <%= careGiver.name%></h5>
-  <label>
-    Comment:
-    <input type="text" name="comment">
-  </label>
-  <br>
-  <label>
-    Rating:
-    <select name="rating">
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-      <option value="5">5</option>
-    </select>
-  </label>
-  <br>
-  <button> Send rating </button>
-</form>
 
-</head>
+<center>
 <div class="section"></div>
 <div class="row">
-<form method="post" action="/search">
-  <div class="col s12 m3">
-    <div class="input-field">
-      <select name="service">
-        <option value="" disabled selected>Rate from 1 to 5</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-      </select>
-      <label>Care type</label>
-    </div>
-  </div>
-  <div class="col s12 m3">
-    <div class='row'>
-      <div class='input-field col s12'>
-        <input class='validate' type='text' name='city' id='city' />
-        <label for='city'>Enter your city</label>
-      </div>
-    </div>
-  </div>
-  <div class="col s12 m3">
-    <div class='row'>
-      <div class='input-field col s12'>
-        <input class='validate' type='date' name='bookedDate' id='bookedDate' />
-        <label for='bookedDate'></label>
-      </div>
-    </div>
-  </div>
-  <div class="col s12 m3">
-    <div class='row'>
-      <div class='input-field col s12'>
-        <button type='submit' name='btn_login' class='col s12 btn btn-large waves-effect blue'>Search</button>
-      </div>
-    </div>
-  </div>
-  </form>
+  <form method="post" action="/services/<%= service._id %>/rate">
 
+    <div class="row">
+      <div class="input-field col s12 l6">
+        <textarea type='text' name='comment' id='comment' class="validate materialize-textarea"></textarea>
+        <label for="comment">How did you like the care received?</label>
+      </div>
+    </div>
+
+    <div class="col s12 l6">
+      <div class="input-field">
+        <select name="rating">
+          <option value="" disabled selected>Rate from 1 to 5</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+        <label>Care type</label>
+      </div>
+    </div>  
+    <div class="section"></div>
+    <div class="section"></div>
+    <div class="section"></div>
+
+    <center>
+    <div class="col s12 l4">
+      <div class='row'>
+        <div class='input-field col s12'>
+          <button type='submit' name='btn_login' class='col s12 btn btn-large waves-effect blue'>Send rating</button>
+        </div>
+      </div>
+    </div>
+    </center>
+  </form>
 </div>
+</center>

@@ -3,6 +3,7 @@ var ctx2 = document.getElementById("myChart2").getContext("2d");
 Chart.defaults.global.hover.mode = "nearest";
 
 var data = heartRates;
+var data2 = oxigenation;
 
 var myChart1 = new Chart(ctx, {
   type: "line",
@@ -11,5 +12,5 @@ var myChart1 = new Chart(ctx, {
 
 var myChart2 = new Chart(ctx2, {
   type: "line",
-  data: data
+  data: data2
 });

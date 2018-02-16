@@ -1,6 +1,34 @@
+<style>
+a {
+      color: inherit;
+    }
+</style>
+
+<div style="padding: 32px 48px 0px 48px;">
 <h6>Please find the details below:</h6>
-<span>Patient: <%= service.careTaker.name %></span>
+<div class="section">
+<div class="row">
+  <a href="#">
+    <div class="col s12 m6 l3">
+
+    <img src="<%=careTaker.pictures[0]%>" class="col s12" > <br/>
+
+      <h5 class="h5"> <%= careTaker.name %> </h5><br>
+      <span><b>Address:</b> <%= careTaker.address %>, <%= careTaker.city %>, <%= careTaker.country %> </span> <br/>
+      <span><b>Medicaments: </b><%= careTaker.medicament1 %>, <%= careTaker.medicament2 %>, <%= careTaker.medicament3 %>, <%= careTaker.medicament4 %>, <%= careTaker.medicament5 %></span><br>
+      <span><b>Date:</b> <%= moment(service.bookedDates[0]).format("LL") %></span>
+    </div>
+    </a>
+
+</div>
+</div>
+<div class="section"></div>
 <form method="POST" action="/services/<%= service._id %>/confirm/final">
 
-  <button>Confirm service</button>
+  <div class='row'>
+  <button type='submit' name='btn_login' class='col s12 l2 btn btn-large waves-effect'>Confirm service
+  <i class="material-icons right">done_all</i>
+  </button>
+  </div>
 </form>
+</div>

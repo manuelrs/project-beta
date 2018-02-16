@@ -24,23 +24,12 @@ for (var i = 0; i < careGiver.feedback.length; i++) {
 </div>
 <span>Address: <%= careGiver.address %>, <%= careGiver.city %>, <%= careGiver.country %> </span> <br/>
 <span>About me: <%= careGiver.description %> </span> 
-<li>
-    <ul>
-<% comments.forEach((comment) => { %>
-  
-      <li> <b>Comment</b>: <%= comment %> </li>
-    
-<% }) %>
-</ul>
-  </li>
-</ul>
-</ul>
 
 <% if(user.role === "careTaker") {%>
 
 <div class="section"></div>
 <div class="row">
-<form method="post" action="/search">
+<form method="post" action="/services/<%= careGiver._id %>/book">
   <div class="col s12 m4 l3">
     <div class="input-field">
       <select name="service">
@@ -71,12 +60,30 @@ for (var i = 0; i < careGiver.feedback.length; i++) {
   <div class="col s12 m4 l3">
     <div class='row'>
       <div class='input-field col s12'>
-        <button type='submit' name='btn_login' class='col s12 btn btn-large waves-effect blue'>Confirm availability</button>
+        <button type='submit' name='btn_login' class='col s12 btn btn-large waves-effect blue'>Confirm an appointment</button>
       </div>
     </div>
   </div>
   </form>
 
 </div>
+
+<%}%>
+
+<% if(user.role === "careGiver") {%>
+
+<h5>What other used have said about <%= careGiver.name%>:</h5>
+
+
+    <ul>
+<% comments.forEach((comment) => { %>
+  
+      <li> <b>Comment</b>: <%= comment %> </li>
+    
+<% }) %>
+</ul>
+  
+</ul>
+</ul>
 
 <%}%>

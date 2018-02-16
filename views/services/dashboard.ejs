@@ -28,7 +28,7 @@
 </div>
 <div id="pending" class="col s12">
 <ul>
-  <% services.filter(service => service.confirmed === false).forEach((service) => { %>
+  <% services.filter(service => service.confirmed === false).filter(service => service.declined === false).forEach((service) => { %>
     <li>
       <h6> <%= serviceParser(service.service) %> you by <%= service.careGiver.name %> on <%= moment(service.bookedDates[0]).format("LL") %> </h6>
     </li>
@@ -70,7 +70,7 @@
       <h6> <%= serviceParser(service.service) %> <%= service.careTaker.name %> on <%= moment(service.bookedDates[0]).format("LL") %> </h6>
 
       <ul>
-      <a class="waves-effect waves-light btn" href="/services/<%= service._id %>/confirm">Confirm service
+      <a class="waves-effect waves-light btn" href="/services/<%= service._id %>/confirm">See details
       <i class="material-icons right">check</i>
       </a>
       <a class="waves-effect waves-light btn" href="/services/<%= service._id %>/decline">Decline service
