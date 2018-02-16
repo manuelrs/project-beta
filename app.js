@@ -15,8 +15,8 @@ const flash = require("connect-flash");
 const mongoose = require("mongoose");
 require("dotenv").config();
 
-mongoose.connect("mongodb://localhost/project-beta");
-//mongoose.connect(process.env.MONGODB_URI);
+//mongoose.connect("mongodb://localhost/project-beta");
+mongoose.connect(process.env.MONGODB_URI);
 
 const app = express();
 
