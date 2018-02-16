@@ -1,89 +1,181 @@
-<form method="POST" action="/signup">
-  <label>
-    Username:
-    <input type="text" name="username">
-  </label>
-  <br>
-  <label>
-    Name:
-    <input type="text" name="name">
-  </label>
-  <br>
-  <label>
-    Family name:
-    <input type="text" name="familyName">
-  </label>
-  <br>
-  <label>
-    E-mail:
-    <input type="email" name="email">
-  </label>
-  <br>
-  <label>
-    Password:
-    <input type="password" name="password">
-  </label>
-  <br>
-  <label>
-    Address:
-    <input type="text" name="address">
-  </label>
-  <br>
-  <label>
-    Country:
-    <input type="text" name="country">
-  </label>
-  <br>
-  <label>
-    City:
-    <input type="text" name="city">
-  </label>
-  <br>
-  <label>
-    Zip Code:
-    <input type="number" name="zipCode">
-  </label>
-  <br>
-  <label>
-    Phone number:
-    <input type="text" name="phoneNumber">
-  </label>
-  <br>
-  <div class="input-field">
-    <select name="role">
-      <option value="" disabled selected>Choose one option</option>
-      <option value="careGiver">Care giver</option>
-      <option value="careTaker">Care taker</option>
-    </select>
-    <label>Role</label>
-  </div>
-  <br>
-  <div class="input-field">
-    <select name="service">
-      <option value="" disabled selected>Choose one option</option>
-      <option value="activity">Activity</option>
-      <option value="company">Company</option>
-      <option value="support">Support</option>
-      <option value="professionalCare">Professional care</option>
-    </select>
-    <label>Care type</label>
-  </div>
-  <br>
-  <label>
-    Price:
-    <input type="number" name="price">
-  </label>
-  <br>
-  <label>
-    Description:
-    <input type="text" name="description">
-  </label>
-  <br>
-  <label>
-    Picture URL:
-    <input type="text" name="pictures">
-  </label>
-  <br>
-  
-  <button>Signup</button>
-</form>
+
+<head>
+<style>
+  body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+
+  main {
+    flex: 1 0 auto;
+  }
+
+  body {
+    background: #fff;
+  }
+
+  .input-field input[type=date]:focus + label,
+  .input-field input[type=text]:focus + label,
+  .input-field input[type=email]:focus + label,
+  .input-field input[type=password]:focus + label {
+    color: #e91e63;
+  }
+
+  .input-field input[type=date]:focus,
+  .input-field input[type=text]:focus,
+  .input-field input[type=email]:focus,
+  .input-field input[type=password]:focus {
+    border-bottom: 2px solid #e91e63;
+    box-shadow: none;
+  }
+</style>
+</head>
+
+
+<div class="section"></div>
+<main>
+  <center>
+
+    <h5 class="blue-text">Create a new account</h5>
+    <div class="section"></div>
+
+    <div class="container">
+      <div class="z-depth-1 grey lighten-4 row" style="display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
+
+        <form class="col s12" method="post" action="/signup">
+          <div class='row'>
+            <div class='col s12'>
+            </div>
+          </div>
+
+          <div class='row'>
+            <div class='input-field col s12'>
+              <input class='validate' type='text' name='username' id='username' />
+              <label for='username'>Enter your user name</label>
+            </div>
+          </div>
+
+          <div class='row'>
+            <div class='input-field col s12'>
+              <input class='validate' type='text' name='name' id='name' />
+              <label for='name'>Enter your name</label>
+            </div>
+          </div>
+
+          <div class='row'>
+            <div class='input-field col s12'>
+              <input class='validate' type='text' name='familyName' id='familyName' />
+              <label for='familyName'>Enter your Family name</label>
+            </div>
+          </div>
+
+          <div class='row'>
+            <div class='input-field col s12'>
+              <input class='validate' type='text' name='email' id='email' />
+              <label for='email'>Enter your email address</label>
+            </div>
+          </div>
+
+          <div class='row'>
+            <div class='input-field col s12'>
+              <input class='validate' type='password' name='password' id='password' />
+              <label for='password'>Enter your password</label>
+          </div>
+
+          <div class='row'>
+            <div class='input-field col s12'>
+              <input class='validate' type='text' name='address' id='address' />
+              <label for='address'>Enter your address</label>
+            </div>
+          </div>
+
+          <div class='row'>
+            <div class='input-field col s12'>
+              <input class='validate' type='text' name='country' id='country' />
+              <label for='country'>Enter your country</label>
+            </div>
+          </div>
+
+          <div class='row'>
+            <div class='input-field col s12'>
+              <input class='validate' type='text' name='city' id='city' />
+              <label for='city'>Enter your city</label>
+            </div>
+          </div>
+
+          <div class='row'>
+            <div class='input-field col s12'>
+              <input class='validate' type='number' name='zipCode' id='zipCode' />
+              <label for='zipCode'>Enter your zip code</label>
+            </div>
+          </div>
+
+          <div class='row'>
+            <div class='input-field col s12'>
+              <input class='validate' type='number' name='phoneNumber' id='phoneNumber' />
+              <label for='phoneNumber'>Enter your phone number</label>
+            </div>
+          </div>
+
+          <div class='row'>
+            <div class='input-field col s12'>
+              <input class='validate' type='text' name='pictures' id='pictures' />
+              <label for='pictures'>Please enter a picture URL</label>
+            </div>
+          </div>
+
+          <div class="input-field">
+            <select name="role">
+              <option value="" disabled selected>Choose one role</option>
+              <option value="careGiver">Care giver</option>
+              <option value="careTaker">Care taker</option>
+            </select>
+            <label>Role</label>
+          </div>
+
+          <div class="input-field">
+            <select name="service">
+              <option value="" disabled selected>Choose a care type</option>
+              <option value="company">Company</option>
+              <option value="support">Support</option>
+              <option value="professionalCare">Professional care</option>
+            </select>
+            <label>Care type</label>
+          </div>
+
+          <div class='row'>
+            <div class='input-field col s12'>
+              <input class='validate' type='number' name='price' id='price' />
+              <label for='price'>Enter your hourly rate</label>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="input-field col s12">
+              <textarea type='text' name='description' id='description' class="validate materialize-textarea"></textarea>
+              <label for="description">Please describe yourself</label>
+            </div>
+          </div>
+
+          </div>
+
+          <br />
+          <center>
+            <div class='row'>
+              <button type='submit' name='btn_login' class='col s12 btn btn-large waves-effect blue'>Sign up</button>
+            </div>
+          </center>
+        </form>
+      </div>
+    </div>
+    <a href="/login">Already an user? Log in</a>
+  </center>
+
+  <div class="section"></div>
+  <div class="section"></div>
+</main>
+
+
+
+

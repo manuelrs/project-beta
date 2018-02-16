@@ -1,5 +1,5 @@
 <form method="POST" action="/services/<%= service._id %>/rate">
-<h3>Rate the care received by <%= careGiver.name%></h3>
+<h5>Rate the care received by <%= careGiver.name%></h5>
   <label>
     Comment:
     <input type="text" name="comment">
@@ -18,3 +18,47 @@
   <br>
   <button> Send rating </button>
 </form>
+
+</head>
+<div class="section"></div>
+<div class="row">
+<form method="post" action="/search">
+  <div class="col s12 m3">
+    <div class="input-field">
+      <select name="service">
+        <option value="" disabled selected>Rate from 1 to 5</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+      </select>
+      <label>Care type</label>
+    </div>
+  </div>
+  <div class="col s12 m3">
+    <div class='row'>
+      <div class='input-field col s12'>
+        <input class='validate' type='text' name='city' id='city' />
+        <label for='city'>Enter your city</label>
+      </div>
+    </div>
+  </div>
+  <div class="col s12 m3">
+    <div class='row'>
+      <div class='input-field col s12'>
+        <input class='validate' type='date' name='bookedDate' id='bookedDate' />
+        <label for='bookedDate'></label>
+      </div>
+    </div>
+  </div>
+  <div class="col s12 m3">
+    <div class='row'>
+      <div class='input-field col s12'>
+        <button type='submit' name='btn_login' class='col s12 btn btn-large waves-effect blue'>Search</button>
+      </div>
+    </div>
+  </div>
+  </form>
+
+</div>

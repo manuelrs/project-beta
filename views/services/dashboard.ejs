@@ -8,20 +8,23 @@
 </div>
 <% if (req.user.role === "careTaker") { %>
 <div id="past" class="col s12">
-  <ul>
+  <!--<ul>-->
   <% services.filter(service => service.confirmed === true).filter(service => service.logged === true).filter(service => service.rated === false).forEach((service) => { %>
-    <li>
+   <!-- <li>-->
       <h6> <%= serviceParser(service.service) %> you by <%= service.careGiver.name %>  on <%= moment(service.bookedDates[0]).format("LL") %> </h6>
-
-      <ul>
-        <a href="/services/<%= service._id %>/rate">Rate the care giver</a>
+      <!--<ul>-->
+        <a class="waves-effect waves-light btn" href="/services/<%= service._id %>/rate">Rate the care giver
+          <i class="material-icons right">check</i>
+        </a>
         <form method="POST" action="/services/<%= service._id %>/skip">
-	        <button>Already rated</button>
+          <button class="btn waves-effect waves-light">Already rated
+            <i class="material-icons right">close</i>
+          </button>
         </form>
-      </ul>
-    </li>
+      <!--</ul>-->
+    <!--</li>-->
   <% }) %>
-</ul>
+<!--</ul>-->
 </div>
 <div id="pending" class="col s12">
 <ul>
@@ -52,7 +55,9 @@
       <h6> <%= serviceParser(service.service) %> <%= service.careTaker.name %> on <%= moment(service.bookedDates[0]).format("LL") %> </h6>
 
       <ul>
-        <a href="/services/<%= service._id %>/complete">Complete care</a>
+        <a class="waves-effect waves-light btn" href="/services/<%= service._id %>/complete">Complete care
+        <i class="material-icons right">assignment</i>
+        </a>
       </ul>
     </li>
   <% }) %>
@@ -65,8 +70,12 @@
       <h6> <%= serviceParser(service.service) %> <%= service.careTaker.name %> on <%= moment(service.bookedDates[0]).format("LL") %> </h6>
 
       <ul>
-      <a href="/services/<%= service._id %>/confirm">Confirm service</a>
-      <a href="/services/<%= service._id %>/decline">Decline service</a>
+      <a class="waves-effect waves-light btn" href="/services/<%= service._id %>/confirm">Confirm service
+      <i class="material-icons right">check</i>
+      </a>
+      <a class="waves-effect waves-light btn" href="/services/<%= service._id %>/decline">Decline service
+      <i class="material-icons right">close</i>
+      </a>
       </ul>
     </li>
   <% }) %>

@@ -17,7 +17,11 @@
   <li><a href="/signup"> Sign up </a></li>
   <li><a href="/login"> Login </a></li>
   <% } else { %>
-  <li><a href="/services/<%= user._id%>/edit"><%= user.name%></a></li>
+  <li><a href="/services/<%= user._id%>"> <%= user.name %> </a></li>
+  <li><a href="/services/<%= user._id%>/edit">Edit
+    <i class="material-icons right">edit</i>
+  </a></li>
+  <li class="divider"></li>
   <li><a href="/services"> Services </a></li>
   <li><a href="/dashboard"> Dashboard </a></li>
   <li class="divider"></li>
@@ -29,9 +33,11 @@
       <ul class="right hide-on-med-and-down">
         <!-- Dropdown Trigger -->
       <% if (user) { %>
-      <li><a href="/services/<%= user._id %>/history">Your cockpit</a></li>
+      <li><a href="/services/<%= user._id %>/history">Your cockpit
+      <i class="material-icons right">timeline</i>
+      </a></li>
       <%}%>
-      <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Profile<i class="material-icons right">arrow_drop_down</i></a></li>
+      <li><a class="dropdown-button" href="#!" data-activates="dropdown1">My options<i class="material-icons right">arrow_drop_down</i></a></li>
       </ul>
 
       <ul id="nav-mobile" class="side-nav">
@@ -39,7 +45,11 @@
         <li><a href="/signup"> Sign up </a></li>
         <li><a href="/login"> Login </a></li>
         <% } else { %>
-        <li><a href="/services/<%= user._id%>/edit"><%= user.name%></a></li>
+        <li><a href="/services/<%= user._id%>"> <%= user.name %> </a></li>
+        <li><a href="/services/<%= user._id%>/edit">Edit
+          <i class="material-icons right">edit</i>
+        </a></li>
+        <li class="divider"></li>
         <li><a href="/services"> Services </a></li>
         <li><a href="/dashboard"> Dashboard </a></li>
         <li class="divider"></li>

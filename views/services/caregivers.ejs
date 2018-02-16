@@ -1,36 +1,98 @@
-<h5> Caregivers near you </h5>
-<form method="POST" action="/search">
-<label>
-Care type:
-<select name="service">
-  <option value="company">Company</option>
-  <option value="support">Support</option>
-  <option value="professionalCare">Professional care</option>
-</select>
-</label>
+<head>
+  <style>
+    body {
+      display: flex;
+      min-height: 100vh;
+      flex-direction: column;
+    }
 
-<label>
-City:
-<input type="text" name="city">
-</label>
+    main {
+      flex: 1 0 auto;
+    }
 
-<label>
-Date:
-<input type="date" name="bookedDate">
-</label>
-<button>Search</button>
-</form>
+    body {
+      background: #fff;
+    }
 
-<ul>
+    .input-field input[type=date]:focus + label,
+    .input-field input[type=number]:focus + label,
+    .input-field input[type=text]:focus + label,
+    .input-field input[type=email]:focus + label,
+    .input-field input[type=password]:focus + label {
+      color: #e91e63;
+    }
+
+    .input-field input[type=date]:focus,
+    .input-field input[type=number]:focus,
+    .input-field input[type=text]:focus,
+    .input-field input[type=email]:focus,
+    .input-field input[type=password]:focus {
+      border-bottom: 2px solid #e91e63;
+      box-shadow: none;
+    }
+
+    
+    a {
+      color: inherit;
+    }
+
+  </style>
+</head>
+<div class="section"></div>
+<div class="row">
+<form method="post" action="/search">
+  <div class="col s12 m3">
+    <div class="input-field">
+      <select name="service">
+        <option value="" disabled selected>Choose a care type</option>
+        <option value="company">Company</option>
+        <option value="support">Support</option>
+        <option value="professionalCare">Professional care</option>
+      </select>
+      <label>Care type</label>
+    </div>
+  </div>
+  <div class="col s12 m3">
+    <div class='row'>
+      <div class='input-field col s12'>
+        <input class='validate' type='text' name='city' id='city' />
+        <label for='city'>Enter your city</label>
+      </div>
+    </div>
+  </div>
+  <div class="col s12 m3">
+    <div class='row'>
+      <div class='input-field col s12'>
+        <input class='validate' type='date' name='bookedDate' id='bookedDate' />
+        <label for='bookedDate'></label>
+      </div>
+    </div>
+  </div>
+  <div class="col s12 m3">
+    <div class='row'>
+      <div class='input-field col s12'>
+        <button type='submit' name='btn_login' class='col s12 btn btn-large waves-effect blue'>Search</button>
+      </div>
+    </div>
+  </div>
+  </form>
+
+</div>
+
+<div class="section">
+<div class="row">
   <% careGiversList.forEach((careGiver) => { %>
-    <li>
-      <h3> <%= careGiver.name %> </h3>
-      <img src="<%=careGiver.pictures[0]%>" width ="200" height ="140"> <br/>
+  <a href="/services/<%= careGiver._id %>">
+    <div class="col s12 m6 l3">
+
+    <img src="<%=careGiver.pictures[0]%>" class="col s12" > <br/>
+
+      <h5 class="h5"> <%= careGiver.name %> </h5><br>
       <span> <%= careGiver.address %>, <%= careGiver.city %>, <%= careGiver.country %> </span> <br/>
 
-      <a href="/services/<%= careGiver._id %>">
-        Show profile
-      </a>
-    </li>
+    </div>
+    </a>
   <% }) %>
-</ul>
+
+</div>
+</div>
