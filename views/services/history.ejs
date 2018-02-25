@@ -7,8 +7,20 @@
 
 </style>
 
+<%var heartRateValues = [];
+
+patientCard[0].patientInfo.forEach(info => {
+  heartRateValues.push(info.heartRate);
+});
+
+
+%>
+
 
 <script>
+
+
+
     var heartRates = {
       labels: [1,2,3,4,5,6,7,8,9,10],
         datasets: [{ 
@@ -32,6 +44,7 @@
         };
 </script>
 
+<% if(user.role ==="careTaker") { %>
 <h5>Patient overview:</h5>
 <div class="section"></div>
   <div class="row">
@@ -47,8 +60,20 @@
 <h5>Comments:</h5>
 
 <% patientCard[0].patientInfo.forEach((info) => { %>
-<%= info.careGiver.name %> wrote on <%= moment(info.date).format("LL")%>  <%= info.comments %> <br>
-<% })%>
+<div class="row">
+<div class="col s2 m2 l1">
+    <img style ="border-radius: 50%;" src="<%= info.careGiverPictures[0] %>" height="50"> 
+  </div>
+  <div class="col s10 m10 l11">
+    <%= info.careGiver %> wrote on <%= moment(info.date).format("LL")%>: <br>  <%= info.comments %> <br>
+    </div>
+    </div>
+  <% })%>
+
+<%} else {%>
+<h5>Your patients:</h5>
+<%}%>
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.js"></script>
 <script src="/javascripts/myChart.js"></script> 

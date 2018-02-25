@@ -1,18 +1,46 @@
 
-<div class="section no-pad-bot" id="index-banner">
-    <div class="container">
-      <br><br>
-      <h1 class="header center blue-text">Care network</h1>
-      <div class="row center">
-        <h5 class="header col s12 light">A single stop solution for all your care needs</h5>
+<div class=" no-pad-bot" id="index-banner">
+  <div class="slider">
+  <ul class="slides">
+    <li>
+      <img src="images/c1.jpg">
+      <div class="caption center-align">
+        <h3 class="light blue-text text-darken-3">Find a care professional</h3>
+        <h5 class="light blue-text text-darken-3">Find someone that suits your needs.</h5>
       </div>
-      <div class="row center">
-        <a href="/signup" id="download-button" class="btn-large waves-effect waves-light blue">Join us!</a>
+    </li>
+    <li>
+      <img src="images/c2.jpg"> 
+      <div class="caption center-align">
+        <h3 class="light white-text">Schedule an appointment</h3>
+        <h5 class="light white-text">Just fill in the info and click on confirm. As simple as that.</h5>
       </div>
-      <br><br>
-
-    </div>
+    </li>
+    <li>
+      <img src="images/c3.jpg"> 
+      <<div class="caption center-align">
+        <h3 class="light blue-grey-text text-darken-3">Enjoy the care</h3>
+        <h5 class="light blue-grey-text text-darken-3">The care professional will come to you as scheduled. Afterwards make sure to give your care professional a review.</h5>
+      </div>
+    </li>
+    <li>
+      <img src="images/c4.png"> 
+      <d<div class="caption center-align">
+        <h3 class="light white blue-text text-darken-2">Profit from real time analytics</h3>
+        <h5 class="light white blue-text text-darken-2">We are going to analyze your data for you. The insights we gain are usually eye-opening. You are the data owner, so share or delete as you wish. </h5>
+      </div>
+    </li>
+  </ul>
   </div>
+  <div class="buttons-wrapper">
+  <div class="row center">
+    <a href="/signup" class="waves-effect blue waves-light btn hoverable mg-rg">Join now</a>
+  </div>
+</div>
+
+  </div>
+    
+</div>
 
   <div class="container">
     <div class="section">
@@ -50,3 +78,57 @@
     </div>
     <br><br>
   </div>
+
+
+  <footer class="page-footer light-blue">
+  <div class="container light-blue">
+    <div class="row">
+      <div class="col l6 s12">
+        <h5 class="white-text">Are you hiring?</h5>
+        <span class="grey-text text-lighten-4">Get in touch and send me an </span><a class="grey-text text-lighten-1" href="mailto:manuel.rojas.soto@gmail.com">e-mail.</a>
+      </div>
+      <div class="col l4 offset-l2 s12">
+        <h5 class="white-text">Links</h5>
+        <ul>
+          <li><a class="grey-text text-lighten-3" href="https://github.com/manuelrs/project-beta">The code @Github</a></li>
+          <li><a class="grey-text text-lighten-3" href="https://www.linkedin.com/in/manuel-rojas/">My linkedIn profile</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer-copyright">
+    <div class="container">
+    2018 Manuel Rojas 
+    <a class="grey-text text-lighten-4 right" >Try as a patient: username and password: patient</a>
+    </div>
+  </div>
+</footer>
+
+<style>
+.slider .indicators .indicator-item.active {
+  background-color: #03a9f4;
+}
+
+.buttons-wrapper {
+  position: absolute;
+  height: calc(100vh);
+  margin-top: 64px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 997;
+  top: 0;
+  pointer-events: none;
+  width: 100%;
+}
+.buttons-wrapper a {
+  pointer-events: auto;
+}
+.mg-rg {
+  margin-right: 1rem;
+  margin-left: 1rem;
+  margin-top: 1rem;
+}
+
+</style>

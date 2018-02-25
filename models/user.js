@@ -97,6 +97,10 @@ const userSchema = new Schema({
   },
   medicament5: {
     type: String
+  },
+  patients: {
+    type: Array,
+    default: []
   }
 });
 

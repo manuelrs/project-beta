@@ -52,6 +52,12 @@ const serviceSchema = new Schema({
   rated: {
     type: Boolean,
     default: false
+  },
+  careTakerName: {
+    type: String
+  },
+  careGiverName: {
+    type: String
   }
 });
 

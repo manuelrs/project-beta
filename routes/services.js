@@ -68,18 +68,6 @@ router.post("/services/:id/book", ensureLoggedIn(), (req, res, next) => {
   const city = req.user.city;
   const bookedDate = req.body.bookedDate;
 
-  const serviceInfo = {
-    careGiver: caregiverId,
-    careTaker: careTakerId,
-    address: address,
-    country: country,
-    zipCode: zipCode,
-    service: service,
-    city: city,
-    price: price,
-    bookedDates: bookedDate
-  };
-
   User.findByIdAndUpdate(
     caregiverId,
     {
@@ -90,16 +78,35 @@ router.post("/services/:id/book", ensureLoggedIn(), (req, res, next) => {
         next(err);
         return;
       }
+      const careGiverName = updatedCareGiver.name;
+      User.findById(careTakerId, (err, careTaker) => {
+        if (err) return next(err);
+        const careTakerName = careTaker.name;
 
-      const newService = new Service(serviceInfo);
+        const serviceInfo = {
+          careGiver: caregiverId,
+          careTaker: careTakerId,
+          address: address,
+          country: country,
+          zipCode: zipCode,
+          service: service,
+          city: city,
+          price: price,
+          bookedDates: bookedDate,
+          careTakerName: careTakerName,
+          careGiverName: careGiverName
+        };
 
-      newService.save(err => {
-        if (err) {
-          next(err);
-          return;
-        }
-        res.render("services/booked", {
-          careGiver: updatedCareGiver
+        const newService = new Service(serviceInfo);
+
+        newService.save(err => {
+          if (err) {
+            next(err);
+            return;
+          }
+          res.render("services/booked", {
+            careGiver: updatedCareGiver
+          });
         });
       });
     }
@@ -207,7 +214,16 @@ router.post("/services/:id/confirm/final", (req, res, next) => {
   const serviceId = req.params.id;
   Service.findByIdAndUpdate(serviceId, { confirmed: true }, (err, service) => {
     if (err) next(err);
-    res.render("services/confirmation", { message: "your confirmation." });
+    User.findByIdAndUpdate(
+      service.careGiver,
+      {
+        $push: { patients: service.careTaker }
+      },
+      (err, user) => {
+        if (err) next(err);
+        res.render("services/confirmation", { message: "your confirmation." });
+      }
+    );
   });
 });
 
@@ -274,9 +290,12 @@ router.post("/services/:id/complete", (req, res, next) => {
                   medicament4: req.body.medicament4,
                   medicament5: req.body.medicament5,
                   comments: req.body.comments,
-                  careGiver: careGiver,
+                  careGiver: careGiver.name,
+                  careGiverPictures: careGiver.pictures,
                   date: Date.now()
-                }
+                },
+                heartRateArray: req.body.heartRate,
+                oxigenationArray: req.body.oxigenation
               },
               $set: {
                 completed: true
@@ -367,7 +386,6 @@ router.post("/services/:id/skip", (req, res, next) => {
 router.get("/services/:id/history", ensureLoggedIn(), (req, res, next) => {
   PatientCard.find({ careTakerId: req.params.id }, (err, patientCard) => {
     if (err) next(err);
-    console.log(patientCard[0].patientInfo);
     res.render("services/history", {
       patientCard: patientCard,
       moment: moment

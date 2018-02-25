@@ -38,6 +38,18 @@ const patientCardSchema = new Schema({
   completed: {
     type: Boolean,
     default: false
+  },
+  heartRateArray: {
+    type: Array
+  },
+  oxigenationArray: {
+    type: Array
+  },
+  careTakerName: {
+    type: String
+  },
+  careGiverName: {
+    type: String
   }
 });
 

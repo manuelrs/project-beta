@@ -7,3 +7,8 @@
 $(document).ready(function() {
   $("select").material_select();
 });
+
+$(".slider").slider({
+  fullWidth: true,
+  interval: 1000000
+});

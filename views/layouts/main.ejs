@@ -7,6 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Care network</title>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link ="shortcut icon" href="images/favicon.ico">
   <link href="/stylesheets/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -22,9 +23,6 @@
     <i class="material-icons right">edit</i>
   </a></li>
   <li class="divider"></li>
-  <li><a href="/services"> Services </a></li>
-  <li><a href="/dashboard"> Dashboard </a></li>
-  <li class="divider"></li>
   <li><a href="/logout"> Logout </a></li>
   <%}%>
 </ul>
@@ -33,6 +31,9 @@
       <ul class="right hide-on-med-and-down">
         <!-- Dropdown Trigger -->
       <% if (user) { %>
+      <li><a href="/services/">Search
+      <i class="material-icons right">search</i>
+      </a></li>
       <li><a href="/services/<%= user._id %>/history">Your cockpit
       <i class="material-icons right">timeline</i>
       </a></li>
@@ -49,9 +50,6 @@
         <li><a href="/services/<%= user._id%>/edit">Edit
           <i class="material-icons right">edit</i>
         </a></li>
-        <li class="divider"></li>
-        <li><a href="/services"> Services </a></li>
-        <li><a href="/dashboard"> Dashboard </a></li>
         <li class="divider"></li>
         <li><a href="/logout"> Logout </a></li>
         <%}%>
