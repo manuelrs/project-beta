@@ -60,6 +60,7 @@ patientCard[0].patientInfo.forEach(info => {
 <h5>Comments:</h5>
 
 <% patientCard[0].patientInfo.forEach((info) => { %>
+<%if(info) {%>
 <div class="row">
 <div class="col s2 m2 l1">
     <img style ="border-radius: 50%;" src="<%= info.careGiverPictures[0] %>" height="50"> 
@@ -68,6 +69,7 @@ patientCard[0].patientInfo.forEach(info => {
     <%= info.careGiver %> wrote on <%= moment(info.date).format("LL")%>: <br>  <%= info.comments %> <br>
     </div>
     </div>
+    <%}%>
   <% })%>
 
 <%} else {%>
