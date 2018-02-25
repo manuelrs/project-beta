@@ -59,6 +59,7 @@ patientCard[0].patientInfo.forEach(info => {
 
 <h5>Comments:</h5>
 
+<% if(patientCard[0].patientInfo !== undefined) {%>
 <% patientCard[0].patientInfo.forEach((info) => { %>
 <%if(info) {%>
 <div class="row">
@@ -71,6 +72,7 @@ patientCard[0].patientInfo.forEach(info => {
     </div>
     <%}%>
   <% })%>
+  <% } %>
 
 <%} else {%>
 <h5>Your patients:</h5>
